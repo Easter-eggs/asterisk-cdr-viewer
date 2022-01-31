@@ -70,6 +70,10 @@
 	</script>
 </head>
 <body>
+<?php
+if (isset($hide_header) && $hide_header)
+	return true;
+?>
 	<table id="header">
 		<tr>
 			<td id="header_logo" rowspan="2" align="left"><a href="/" title="Home"><img src="templates/images/asterisk.gif" alt="Asterisk CDR Viewer" /></a></td>
@@ -88,4 +92,4 @@
 			?>
 		</td>
 		</tr>
-		</table>
+	</table>

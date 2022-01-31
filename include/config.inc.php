@@ -68,6 +68,9 @@ $display_column['dstchannel'] = 1;
 $display_column['lastapp'] = 1;
 $display_column['userfield'] = 1;
 
+// Hide header
+// $hide_header = 1;
+
 // Load local configuration file is present
 if (is_file("include/config.local.php")) {
         require_once "include/config.local.php";

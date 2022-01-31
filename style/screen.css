@@ -56,7 +56,10 @@ input[type=submit]:active {background:#2222aa;}
 	position : fixed;
 	width : 100%;
 	z-index : 50;
-	display: none;
+}
+
+#header + #main {
+	padding-top : 115px;
 }
 
 #header_logo {
