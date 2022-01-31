@@ -3,9 +3,6 @@
 require_once 'include/config.inc.php';
 require_once 'include/functions.inc.php';
 
-include 'templates/header.tpl.php';
-include 'templates/form.tpl.php';
-
 try {
 	$dbh = new PDO("$db_type:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_pass, $db_options);
 }
@@ -24,7 +21,7 @@ $startmonth = is_blank($_REQUEST['startmonth']) ? date('m') : sprintf('%02d',$_R
 $startyear = is_blank($_REQUEST['startyear']) ? date('Y') : $_REQUEST['startyear'];
 
 if (is_blank($_REQUEST['startday'])) {
-	$startday = '01';
+	$startday = date('d');
 } elseif (isset($_REQUEST['startday']) && ($_REQUEST['startday'] > date('t', strtotime("$startyear-$startmonth-01")))) {
 	$startday = $_REQUEST['startday'] = date('t', strtotime("$startyear-$startmonth"));
 } else {
@@ -70,6 +67,9 @@ if ( is_blank($_REQUEST['did']) ) {
 } else {
 	$did_number = asteriskregexp2sqllike( 'did', '' );
 }
+
+include 'templates/header.tpl.php';
+include 'templates/form.tpl.php';
 
 $date_range = "calldate BETWEEN $startdate AND $enddate";
 $mod_vars['channel'][] = is_blank($_REQUEST['channel']) ? NULL : $_REQUEST['channel'];

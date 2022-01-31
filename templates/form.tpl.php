@@ -15,12 +15,12 @@
 <tr>
 <td><input <?php if (empty($_REQUEST['order']) || $_REQUEST['order'] == 'calldate') { echo 'checked="checked"'; } ?> type="radio" name="order" value="calldate" />&nbsp;Call Date:</td>
 <td>From:
-<input type="text" name="startday" id="startday" size="2" maxlength="2" value="<?php if (isset($_REQUEST['startday'])) { echo htmlspecialchars($_REQUEST['startday']); } else { echo '01'; } ?>" />
+<input type="text" name="startday" id="startday" size="2" maxlength="2" value="<?php echo $startday; ?>" />
 <select name="startmonth" id="startmonth">
 <?php
 $months = array('01' => 'January', '02' => 'February', '03' => 'March', '04' => 'April', '05' => 'May', '06' => 'June', '07' => 'July', '08' => 'August', '09' => 'September', '10' => 'October', '11' => 'November', '12' => 'December');
 foreach ($months as $i => $month) {
-	if ((is_blank($_REQUEST['startmonth']) && date('m') == $i) || (isset($_REQUEST['startmonth']) && $_REQUEST['startmonth'] == $i)) {
+	if ($startmonth == $i) {
 		echo "        <option value=\"$i\" selected=\"selected\">$month</option>\n";
 	} else {
 		echo "        <option value=\"$i\">$month</option>\n";
@@ -31,7 +31,7 @@ foreach ($months as $i => $month) {
 <select name="startyear" id="startyear">
 <?php
 for ( $i = 2000; $i <= date('Y'); $i++) {
-	if ((empty($_REQUEST['startyear']) && date('Y') == $i) || (isset($_REQUEST['startyear']) && $_REQUEST['startyear'] == $i)) {
+	if ($startyear == $i) {
 		echo "        <option value=\"$i\" selected=\"selected\">$i</option>\n";
 	} else {
 		echo "        <option value=\"$i\">$i</option>\n";
@@ -39,15 +39,15 @@ for ( $i = 2000; $i <= date('Y'); $i++) {
 }
 ?>
 </select>
-<input type="text" name="starthour" id="starthour" size="2" maxlength="2" value="<?php if (isset($_REQUEST['starthour'])) { echo htmlspecialchars($_REQUEST['starthour']); } else { echo '00'; } ?>" />
+<input type="text" name="starthour" id="starthour" size="2" maxlength="2" value="<?php echo $starthour; ?>" />
 :
-<input type="text" name="startmin" id="startmin" size="2" maxlength="2" value="<?php if (isset($_REQUEST['startmin'])) { echo htmlspecialchars($_REQUEST['startmin']); } else { echo '00'; } ?>" />
+<input type="text" name="startmin" id="startmin" size="2" maxlength="2" value="<?php echo $startmin; ?>" />
 To:
-<input type="text" name="endday" id="endday" size="2" maxlength="2" value="<?php if (isset($_REQUEST['endday'])) { echo htmlspecialchars($_REQUEST['endday']); } else { echo '31'; } ?>" />
+<input type="text" name="endday" id="endday" size="2" maxlength="2" value="<?php echo $endday; ?>" />
 <select name="endmonth" id="endmonth">
 <?php
 foreach ($months as $i => $month) {
-	if ((is_blank($_REQUEST['endmonth']) && date('m') == $i) || (isset($_REQUEST['endmonth']) && $_REQUEST['endmonth'] == $i)) {
+	if ($endmonth == $i) {
 		echo "        <option value=\"$i\" selected=\"selected\">$month</option>\n";
 	} else {
 		echo "        <option value=\"$i\">$month</option>\n";
@@ -58,7 +58,7 @@ foreach ($months as $i => $month) {
 <select name="endyear" id="endyear">
 <?php
 for ( $i = 2000; $i <= date('Y'); $i++) {
-	if ((empty($_REQUEST['endyear']) && date('Y') == $i) || (isset($_REQUEST['endyear']) && $_REQUEST['endyear'] == $i)) {
+	if ($endyear == $i) {
 		echo "        <option value=\"$i\" selected=\"selected\">$i</option>\n";
 	} else {
 		echo "        <option value=\"$i\">$i</option>\n";
@@ -66,9 +66,9 @@ for ( $i = 2000; $i <= date('Y'); $i++) {
 }
 ?>
 </select>
-<input type="text" name="endhour" id="endhour" size="2" maxlength="2" value="<?php if (isset($_REQUEST['endhour'])) { echo htmlspecialchars($_REQUEST['endhour']); } else { echo '23'; } ?>" />
+<input type="text" name="endhour" id="endhour" size="2" maxlength="2" value="<?php echo $endhour; ?>" />
 :
-<input type="text" name="endmin" id="endmin" size="2" maxlength="2" value="<?php if (isset($_REQUEST['endmin'])) { echo htmlspecialchars($_REQUEST['endmin']); } else { echo '59'; } ?>" />
+<input type="text" name="endmin" id="endmin" size="2" maxlength="2" value="<?php echo $endmin; ?>" />
 &nbsp;
 &nbsp;
 &nbsp;
