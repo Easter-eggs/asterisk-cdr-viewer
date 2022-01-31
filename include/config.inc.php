@@ -68,6 +68,10 @@ $display_column['dstchannel'] = 1;
 $display_column['lastapp'] = 1;
 $display_column['userfield'] = 1;
 
+// Load local configuration file is present
+if (is_file("include/config.local.php")) {
+        require_once "include/config.local.php";
+}
 
 /* User name */
 $cdr_user_name = getenv('REMOTE_USER');
@@ -86,7 +90,7 @@ if ( strlen($cdr_user_name) > 0 ) {
 }
 
 if ( $system_auth_require ) {
-	if ( $_SERVER['AUTH_TYPE'] != 'Basic' ) {
+	if ( $_SERVER['AUTH_TYPE'] != 'Basic' && (!is_string($system_auth_require) || $_SERVER['AUTH_TYPE'] != $system_auth_require) ) {
 		die("HTTP Auth required, please configure WEB server !");
 	}
 }
@@ -96,7 +100,3 @@ foreach ( $plugins as &$p_key ) {
 	require_once "include/plugins/$p_key.inc.php";
 }
 
-// Load local configuration file is present
-if (is_file("include/config.local.php")) {
-        require_once "include/config.local.php";
-}
