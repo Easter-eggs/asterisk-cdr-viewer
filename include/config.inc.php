@@ -78,4 +78,7 @@ foreach ( $plugins as &$p_key ) {
 	require_once "include/plugins/$p_key.inc.php";
 }
 
-?>
+// Load local configuration file is present
+if (is_file("include/config.local.php")) {
+        require_once "include/config.local.php";
+}
