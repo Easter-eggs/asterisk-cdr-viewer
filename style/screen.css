@@ -56,6 +56,7 @@ input[type=submit]:active {background:#2222aa;}
 	position : fixed;
 	width : 100%;
 	z-index : 50;
+	display: none;
 }
 
 #header_logo {
@@ -84,7 +85,6 @@ input[type=submit]:active {background:#2222aa;}
 
 #main {
 	margin : 0;
-	padding-top : 115px;
 }
 
 #footer {
