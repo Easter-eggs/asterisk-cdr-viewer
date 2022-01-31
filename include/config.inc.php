@@ -1,8 +1,8 @@
 <?php
 
-$db_type = 'mysql';
-$db_host = 'localhost';
-$db_port = '3306';
+$db_type = 'pgsql';
+$db_host = '127.0.0.1';
+$db_port = '5432';
 $db_user = 'cdrasterisk';
 $db_pass = 'astcdr123';
 $db_name = 'cdrasterisk';

@@ -311,7 +311,7 @@ if ( isset($_REQUEST['need_html']) && $_REQUEST['need_html'] == 'true' ) {
 
 		$i = $h_step - 1;
 
-		$query = "SELECT *, unix_timestamp(calldate) as call_timestamp FROM $db_table_name $where $order $sort LIMIT $result_limit";
+		$query = "SELECT *, calldate as call_timestamp FROM $db_table_name $where $order $sort LIMIT $result_limit";
 		echo "\n<!--SQL - need_html / raw : $query-->\n";
 
 		$total_rows = 0;
@@ -442,12 +442,12 @@ switch ($group) {
 	case "disposition_by_day":
 		$graph_col_title = 'Disposition by day';
 		$group_by_field_php = array('%Y-%m-%d / ',17,'');
-		$group_by_field = "CONCAT(DATE_FORMAT(calldate, '$group_by_field_php[0]'),disposition)";
+		$group_by_field = "CONCAT(TO_CHAR(calldate, 'YYYY-MM-DD / '),disposition)";
 	break;
 	case "disposition_by_hour":
 		$graph_col_title = 'Disposition by hour';
 		$group_by_field_php = array( '%Y-%m-%d %H / ', 20, '' );
-		$group_by_field = "CONCAT(DATE_FORMAT(calldate, '$group_by_field_php[0]'),disposition)";
+		$group_by_field = "CONCAT(TO_CHAR(calldate, 'YYYY-MM-DD HH24 / '),disposition)";
 	break;
 	case "disposition":
 		$graph_col_title = 'Disposition';
@@ -475,43 +475,43 @@ switch ($group) {
 	break;
 	case "hour":
 		$group_by_field_php = array( '%Y-%m-%d %H', 13, '' );
-		$group_by_field = "DATE_FORMAT(calldate, '$group_by_field_php[0]')";
+		$group_by_field = "TO_CHAR(calldate, 'YYYY-MM-DD HH24')";
 		$graph_col_title = 'Hour';
 	break;
 	case "hour_of_day":
 		$group_by_field_php = array('%H',2,'');
-		$group_by_field = "DATE_FORMAT(calldate, '$group_by_field_php[0]')";
+		$group_by_field = "TO_CHAR(calldate, 'HH24')";
 		$graph_col_title = 'Hour of day';
 	break;
 	case "week":
 		$group_by_field_php = array('%V',2,'');
-		$group_by_field = "DATE_FORMAT(calldate, '$group_by_field_php[0]') ";
+		$group_by_field = "TO_CHAR(calldate, 'IW') ";
 		$graph_col_title = 'Week ( Sun-Sat )';
 	break;
 	case "month":
 		$group_by_field_php = array('%Y-%m',7,'');
-		$group_by_field = "DATE_FORMAT(calldate, '$group_by_field_php[0]')";
+		$group_by_field = "TO_CHAR(calldate, 'YYYY-MM')";
 		$graph_col_title = 'Month';
 	break;
 	case "day_of_week":
 		$group_by_field_php = array('%w - %A',20,'');
-		$group_by_field = "DATE_FORMAT( calldate, '%w - %W' )";
+		$group_by_field = "TO_CHAR( calldate, 'D - Day' )";
 		$graph_col_title = 'Day of week';
 	break;
 	case "minutes1":
 		$group_by_field_php = array( '%Y-%m-%d %H:%M', 16, '' );
-		$group_by_field = "DATE_FORMAT(calldate, '%Y-%m-%d %H:%i')";
+		$group_by_field = "TO_CHAR(calldate, 'YYYY-MM-DD HH24:MI')";
 		$graph_col_title = 'Minute';
 	break;
 	case "minutes10":
 		$group_by_field_php = array('%Y-%m-%d %H:%M',15,'0');
-		$group_by_field = "CONCAT(SUBSTR(DATE_FORMAT(calldate, '%Y-%m-%d %H:%i'),1,15), '0')";
+		$group_by_field = "CONCAT(SUBSTR(TO_CHAR(calldate, 'YYYY-MM-DD HH24:MI'),1,15), '0')";
 		$graph_col_title = '10 Minutes';
 	break;
 	case "day":
 	default:
 		$group_by_field_php = array('%Y-%m-%d',10,'');
-		$group_by_field = "DATE_FORMAT(calldate, '$group_by_field_php[0]')";
+		$group_by_field = "TO_CHAR(calldate, 'YYYY-MM-DD')";
 		$graph_col_title = 'Day';
 }
 
@@ -593,7 +593,7 @@ if ( isset($_REQUEST['need_chart_cc']) && $_REQUEST['need_chart_cc'] == 'true' )
 
 	if ( strpos($group_by_field,'DATE_FORMAT') === false ) {
 		/* not date time fields */
-		$query3 = "SELECT $group_by_field AS group_by_field, count(*) AS total_calls, unix_timestamp(calldate) AS ts, duration FROM $db_table_name $where GROUP BY group_by_field, unix_timestamp(calldate) ORDER BY group_by_field ASC LIMIT $result_limit";
+		$query3 = "SELECT $group_by_field AS group_by_field, count(*) AS total_calls, calldate AS ts, duration FROM $db_table_name $where GROUP BY group_by_field, calldate ORDER BY group_by_field ASC LIMIT $result_limit";
 
 		echo "\n<!--SQL - need_chart_cc / wo date : $query3-->\n";
 
@@ -632,7 +632,7 @@ if ( isset($_REQUEST['need_chart_cc']) && $_REQUEST['need_chart_cc'] == 'true' )
 		$sth = NULL;
 	} else {
 		/* data fields */
-		$query3 = "SELECT unix_timestamp(calldate) AS ts, duration FROM $db_table_name $where ORDER BY unix_timestamp(calldate) ASC LIMIT $result_limit";
+		$query3 = "SELECT calldate AS ts, duration FROM $db_table_name $where ORDER BY calldate ASC LIMIT $result_limit";
 	
 		echo "\n<!--SQL - need_chart_cc : $query3-->\n";
 
