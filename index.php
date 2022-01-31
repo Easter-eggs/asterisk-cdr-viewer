@@ -11,7 +11,7 @@ try {
 }
 catch (PDOException $e) {
 	echo "\nPDO::errorInfo():\n";
-	print $e->getMessage();
+	die($e->getMessage());
 }
 
 // Connecting, selecting database
