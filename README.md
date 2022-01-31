@@ -1,18 +1,18 @@
-Simple and fast viewer for asterisk CDRs / recordings. ( 1.0.14, Oct 7 2017 )
+# Asterisk CDR viewer
 
-    Asterisk regexp support ( like _XNZ. ) for source / destination / DID numbers. 
+This application is a simple and fast viewer for Asterisk CDRs / recordings. It's a fork of the original [asterisk-cdr-viewer](https://github.com/g613/asterisk-cdr-viewer) with some adaptations, mainly the usage of PostgreSQL instead of MySQL.
 
-    PHP without any additional dependencies. 
+## Key features
 
-    Easy to install and use. 
+- Asterisk regexp support ( like _XNZ. ) for source / destination / DID numbers.
+- PHP without any additional dependencies.
+- Easy to install and use.
+- CSS based.
+- User / Admin mode
+- Plugins support for custom reports.
+- ASR report
 
-    CSS based. 
-
-    User / Admin mode 
-
-    Plugins support for custom reports. 
-
-    ASR report 
+## Screenshots
 
 ![Html results](img/image6.png "html results")
 
@@ -21,6 +21,3 @@ Simple and fast viewer for asterisk CDRs / recordings. ( 1.0.14, Oct 7 2017 )
 ![Minutes report](img/image8.jpg "Minutes report")
 
 ![Plugins results](img/image7.jpg "Plugins results")
-
-
-( from http://code.google.com/p/asterisk-cdr-viewer )
